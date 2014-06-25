@@ -33,10 +33,14 @@ angular
                             return Restangular.one('me').one('collections', $stateParams.collectionId).all('files').getList();
                         }
                     ],
-                    allFiles: ['Restangular', '$stateParams',
-                        function(Restangular) {
-                            return Restangular.one('me').all('files').getList().then(function(files) {
-                                return files.reverse();
+                    allFiles: ['Restangular', 'files',
+                        function(Restangular, files) {
+                            return Restangular.one('me').all('files').getList().then(function(allFiles) {
+                                return _.reject(allFiles, function(allFile) {
+                                    return _.findWhere(files, {
+                                        id: allFile.id
+                                    });
+                                }).reverse();
                             });
                         }
                     ],
