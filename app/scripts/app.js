@@ -32,7 +32,14 @@ angular
                         function(Restangular, $stateParams) {
                             return Restangular.one('me').one('collections', $stateParams.collectionId).all('files').getList();
                         }
-                    ]
+                    ],
+                    allFiles: ['Restangular', '$stateParams',
+                        function(Restangular) {
+                            return Restangular.one('me').all('files').getList().then(function(files) {
+                                return files.reverse();
+                            });
+                        }
+                    ],
                 },
                 controller: 'CollectionCtrl',
                 templateUrl: 'views/collection.html'
