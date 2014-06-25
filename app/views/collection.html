@@ -4,10 +4,13 @@
         <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
     </div>
 
-    <div ng-repeat="file in allFiles">
-        <a href ng-click="addFileToCollection(file)">
-            <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
-        </a>
-
+    <button class="btn btn-primary" ng-click="isAddingFiles = true;" ng-hide="isAddingFiles">Add</button>
+    <div ng-if="isAddingFiles">
+        <div ng-repeat="file in allFiles">
+            <a href ng-click="addFileToCollection(file)">
+                <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
+            </a>
+        </div>
     </div>
+
 </div>
