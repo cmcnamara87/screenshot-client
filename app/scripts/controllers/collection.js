@@ -12,7 +12,7 @@ angular.module('screenshotApp')
         $scope.allFiles = allFiles;
 
         $scope.addFileToCollection = function(file) {
-            window.alert('adding file');
+            // window.alert('adding file');
             collection.all('files').post(file);
             $scope.files.push(file);
         };
