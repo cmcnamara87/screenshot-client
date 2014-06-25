@@ -1,9 +1,6 @@
 <div>
-    <p>This is the collection view.</p>
-    <pre>
-		{{ collection | json }}
-	</pre>
-    <pre>
-		{{ files | json }}
-	</pre>
+    <h2>Collection</h2>
+    <div ng-repeat="file in files">
+        <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
+    </div>
 </div>
