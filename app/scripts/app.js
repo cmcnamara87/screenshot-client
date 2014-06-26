@@ -7,7 +7,6 @@ angular
         'restangular'
     ])
     .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
-        console.log('here');
         // For any unmatched url, redirect to /state1
         // $urlRouterProvider.otherwise('/');
 
@@ -15,35 +14,68 @@ angular
         RestangularProvider.setDefaultHttpFields({
             withCredentials: true
         });
-
-        console.log('cant work out the routes booo');
+        RestangularProvider.addElementTransformer('users', function(user) {
+            // This will add a method called login that will do a POST to the path login
+            // signature is (name, operation, path, params, headers, elementToPost)
+            user.addRestangularMethod('login', 'post', 'login');
+            return user;
+        });
 
         // Now set up the states
         $stateProvider
+            .state('login', {
+                url: '/login',
+                controller: 'LoginCtrl',
+                templateUrl: 'views/login.html'
+            })
+            .state('me', {
+                url: '/me',
+                abstract: true,
+                resolve: {
+                    currentUser: ['Restangular', '$rootScope',
+                        function(Restangular, $rootScope) {
+                            return Restangular.one('me').one('user').get().then(function(user) {
+                                $rootScope.currentUser = user;
+                            });
+                        }
+                    ]
+                },
+                template: '<ui-view></ui-view>'
+            })
+            .state('me.collections', {
+                url: '/collections',
+                resolve: {
+                    collections: ['Restangular',
+                        function(Restangular) {
+                            return Restangular.one('me').all('collections').getList();
+                        }
+                    ]
+                },
+                controller: 'CollectionsCtrl',
+                templateUrl: 'views/collections.html'
+            })
             .state('collection', {
                 url: '/collections/:collectionId',
                 resolve: {
                     collection: ['Restangular', '$stateParams',
                         function(Restangular, $stateParams) {
-                            return Restangular.one('me').one('collections', $stateParams.collectionId).get();
+                            return Restangular.one('collections', $stateParams.collectionId).get();
                         }
                     ],
                     files: ['Restangular', '$stateParams',
                         function(Restangular, $stateParams) {
-                            return Restangular.one('me').one('collections', $stateParams.collectionId).all('files').getList();
+                            return Restangular.one('collections', $stateParams.collectionId).all('files').getList();
                         }
                     ],
-                    allFiles: ['Restangular', 'files',
-                        function(Restangular, files) {
-                            return Restangular.one('me').all('files').getList().then(function(allFiles) {
-                                return _.reject(allFiles, function(allFile) {
-                                    return _.findWhere(files, {
-                                        id: allFile.id
-                                    });
-                                }).reverse();
+                    currentUser: ['Restangular', '$rootScope',
+                        function(Restangular, $rootScope) {
+                            return Restangular.one('me').one('user').get().then(function(user) {
+                                $rootScope.currentUser = user;
+                            }, function() {
+                                return null;
                             });
                         }
-                    ],
+                    ]
                 },
                 controller: 'CollectionCtrl',
                 templateUrl: 'views/collection.html'

@@ -1,21 +1,28 @@
 <div>
     <div class="container">
-        <h2>Screenshots</h2>
-        <div ng-repeat="file in files">
-            <h3>{{ $index + 1 }}.</h3>
-            <a ng-href="uploads/{{ file.name }}" target="_blank">
-                <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
-            </a>
+        <div ng-repeat="file in files" class="row">
+            <div class="col-sm-1" ng-show="files.length > 1">
+                <h3>{{ $index + 1 }}.</h3>
+            </div>
+            <div class="col-sm-11" ng-class="{'col-sm-12': files.length == 1}">
+                <a ng-href="uploads/{{ file.name }}" target="_blank">
+                    <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
+                </a>
+            </div>
+
         </div>
 
-        <button class="btn btn-primary" ng-click="isAddingFiles = true;" ng-hide="isAddingFiles">Add</button>
-        <div ng-if="isAddingFiles">
+        <div ng-show="currentUser.id === collection.userId">
+            <button class="btn btn-primary" ng-click="showAllFiles()">Add</button>
             <div ng-repeat="file in allFiles">
                 <a href ng-click="addFileToCollection(file)">
                     <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
                 </a>
             </div>
         </div>
+
+
+
     </div>
 
 
