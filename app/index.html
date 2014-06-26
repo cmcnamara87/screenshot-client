@@ -29,7 +29,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default
+" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,11 +46,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link</a>
-                    </li>
-                    <li><a href="#">Link</a>
-                    </li>
-                    <li class="dropdown">
+                    <!-- <li class="active"><a href="#">Link</a>
+                    </li> -->
+                    <!-- <li><a href="#">Link</a>
+                    </li> -->
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a>
@@ -65,18 +66,20 @@
                             <li><a href="#">One more separated link</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
+                <!-- <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+                </form> -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a>
+                    <li ui-sref-active="active" ng-hide="currentUser"><a ui-sref="login">Log In</a>
                     </li>
-                    <li class="dropdown">
+                    <li ng-show="currentUser"><a href>{{ currentUser.name }}</a>
+                    </li>
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a>
@@ -89,7 +92,7 @@
                             <li><a href="#">Separated link</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -140,6 +143,8 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/collection.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/collections.js"></script>
     <!-- endbuild -->
 </body>
 
