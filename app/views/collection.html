@@ -1,19 +1,22 @@
 <div>
-    <h2>Screenshots</h2>
-    <div ng-repeat="file in files">
-        <h3>{{ $index + 1 }}.</h3>
-        <a ng-href="uploads/{{ file.name }}" target="_blank">
-            <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
-        </a>
-    </div>
-
-    <button class="btn btn-primary" ng-click="isAddingFiles = true;" ng-hide="isAddingFiles">Add</button>
-    <div ng-if="isAddingFiles">
-        <div ng-repeat="file in allFiles">
-            <a href ng-click="addFileToCollection(file)">
-                <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
+    <div class="container">
+        <h2>Screenshots</h2>
+        <div ng-repeat="file in files">
+            <h3>{{ $index + 1 }}.</h3>
+            <a ng-href="uploads/{{ file.name }}" target="_blank">
+                <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
             </a>
         </div>
+
+        <button class="btn btn-primary" ng-click="isAddingFiles = true;" ng-hide="isAddingFiles">Add</button>
+        <div ng-if="isAddingFiles">
+            <div ng-repeat="file in allFiles">
+                <a href ng-click="addFileToCollection(file)">
+                    <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
+                </a>
+            </div>
+        </div>
     </div>
+
 
 </div>
