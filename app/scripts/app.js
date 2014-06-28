@@ -8,7 +8,7 @@ angular
     ])
     .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         // For any unmatched url, redirect to /state1
-        // $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 
         RestangularProvider.setBaseUrl('api/index.php');
         RestangularProvider.setDefaultHttpFields({
@@ -18,6 +18,7 @@ angular
             // This will add a method called login that will do a POST to the path login
             // signature is (name, operation, path, params, headers, elementToPost)
             user.addRestangularMethod('login', 'post', 'login');
+            user.addRestangularMethod('register', 'post', 'register');
             return user;
         });
 
@@ -27,6 +28,15 @@ angular
                 url: '/login',
                 controller: 'LoginCtrl',
                 templateUrl: 'views/login.html'
+            })
+            .state('register', {
+                url: '/register',
+                controller: 'RegisterCtrl',
+                templateUrl: 'views/register.html'
+            })
+            .state('home', {
+                url: '/',
+                templateUrl: 'views/home.html'
             })
             .state('me', {
                 url: '/me',
