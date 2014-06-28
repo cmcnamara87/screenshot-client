@@ -76,7 +76,7 @@
                 </form> -->
                 <ul class="nav navbar-nav navbar-right">
                     <li ui-sref-active="active" ng-hide="currentUser"><a ui-sref="login">Log In</a>
-</li>
+                    </li>
 
                     <li class="dropdown" ng-show="currentUser">
                         <a href class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.name }} <b class="caret"></b></a>
@@ -84,7 +84,7 @@
                             <li><a ui-sref="me.collections">Collections</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="#">Log out</a>
+                            <li><a href ng-click="logout()">Log out</a>
                             </li>
                             <!-- <li><a href="#">Something else here</a>
 </li>

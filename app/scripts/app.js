@@ -5,7 +5,14 @@ angular
         'ngCookies',
         'ui.router',
         'restangular'
-    ])
+
+    ]).run(function($rootScope, $state, Restangular) {
+        $rootScope.logout = function() {
+            $rootScope.currentUser = null;
+            $state.go('home');
+            Restangular.all('users').logout();
+        };
+    })
     .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');
@@ -19,6 +26,7 @@ angular
             // signature is (name, operation, path, params, headers, elementToPost)
             user.addRestangularMethod('login', 'post', 'login');
             user.addRestangularMethod('register', 'post', 'register');
+            user.addRestangularMethod('logout', 'post', 'logout');
             return user;
         });
 
