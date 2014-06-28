@@ -1,29 +1,30 @@
 <div>
-    <div class="container">
-        <div ng-repeat="file in files" class="row">
-            <div class="col-sm-1" ng-show="files.length > 1">
-                <h3>{{ $index + 1 }}.</h3>
-            </div>
-            <div class="col-sm-11" ng-class="{'col-sm-12': files.length == 1}">
-                <a ng-href="uploads/{{ file.name }}" target="_blank">
-                    <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
-                </a>
-            </div>
-
-        </div>
-
-        <div ng-show="currentUser.id === collection.userId">
-            <button class="btn btn-primary" ng-click="showAllFiles()">Add</button>
-            <div ng-repeat="file in allFiles">
-                <a href ng-click="addFileToCollection(file)">
-                    <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive" style="max-width: 200px;">
-                </a>
+    <div class="container-fluid">
+        <div class="col-sm-10">
+            <div ng-repeat="file in files" class="row">
+                <div class="col-sm-1" ng-show="files.length > 1">
+                    <h3>{{ $index + 1 }}.</h3>
+                </div>
+                <div class="col-sm-11" ng-class="{'col-sm-12': files.length == 1}">
+                    <a ng-href="uploads/{{ file.name }}" target="_blank">
+                        <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
+                    </a>
+                </div>
             </div>
         </div>
+        <div class="col-sm-2" ng-show="currentUser.id === collection.userId">
+            <div style="margin-bottom: 20px;">
+                <button class="btn btn-primary" ng-click="showAllFiles()">Add</button>
+            </div>
 
-
-
+            <div class="panel panel-default" ng-repeat="file in allFiles">
+                <div class="panel-body">
+                    <a href ng-click="addFileToCollection(file)">
+                        <img ng-src="uploads/{{ file.name }}" alt="{{ file.name }}" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-
 
 </div>
