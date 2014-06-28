@@ -1,1 +1,12 @@
-<p>This is the collections view.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="collection in collections">
+            <div class="panel panel-default" ui-sref="collection({collectionId: collection.id})">
+                <div class="panel-body">
+                    <span class="badge badge-default pull-right">{{ collection.sharedFile.length }}</span>
+                    Collection {{ $index + 1 }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
